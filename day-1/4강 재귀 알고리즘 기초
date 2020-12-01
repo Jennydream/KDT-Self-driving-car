@@ -1,0 +1,50 @@
+## 개념
+
+재귀함수란(recursive functions) : 하나의 함수에서 자신을 다시 호출하여 작업을 수행
+
+
+## 알고리즘 
+
+ex : 1 부터 n 까지 모든 자연수의 합을 구하는 문제 (sum(n))는, 1 부터 n - 1 까지의 모든 자연수의 합을 구하는 문제 (sum(n - 1))를 풀고, 여기에 n 을 더해서 그 답을 찾을 수 있다. 즉,
+
+def sum(n):
+  if n<=1:
+    return n
+  else:
+  return n+sum(n-1)
+
+sum(10)
+
+- 시간 복잡도 : O(n)
+
+## 연습문제 
+
+문제 설명
+인자로 0 또는 양의 정수인 x 가 주어질 때, Fibonacci 순열의 해당 값을 구하여 반환하는 함수 solution() 을 완성하세요.
+
+Fibonacci 순열은 아래와 같이 정의됩니다.
+F0 = 0
+F1 = 1
+Fn = Fn - 1 + Fn - 2, n >= 2
+
+재귀함수 작성 연습을 의도한 것이므로, 재귀적 방법으로도 프로그래밍해 보고, 반복적 방법으로도 프로그래밍해 보시기 바랍니다.
+
+# 문제풀이 
+
+import sys
+sys.setrecursionlimit(5000)
+def fibo(x):
+    
+    if x<3:
+        return 1
+    else:
+        return fibo(x-1)+fibo(x-2)
+
+def solution(x):
+    answer = 0
+    if x==0:
+        answer=0
+    else:
+        answer=fibo(x)
+    
+    return answer
