@@ -1,0 +1,90 @@
+## 개념 
+
+양방향 연결 리스트란?: 인접한 두 개의 노드들은 앞의 노드로부터 뒤의 노드가 연결되어 있을뿐만 아니라, 뒤의 노드로부터 앞의 노드도 연결되어 있다. 
+양방향 연결 리스트는 데이터 원소들을 차례로 방문할 때, 앞에서부터 뒤로도 할 수 있지만 뒤에서부터 앞으로도 할 수 있다.
+
+-주요 내용 
+  리스트 순회 (traversal)
+  원소 삽입 (insertion)
+  원소 삭제 (deletion)
+  리스트 병합 (concatenation)
+  
+## 알고리즘 
+
+ 연습 문제 참고
+
+-시간복잡도 
+ 탐색 : O(N)
+
+## 연습문제
+
+1. 리스트 역방향 순회 
+
+#문제풀이 
+https://school.programmers.co.kr/courses/11102/lessons/70465
+
+def reverse(self):
+        answer=[]
+        cur=self.tail
+        while cur.prev.prev:
+            cur=cur.prev
+            answer.append(cur.data)
+        return answer
+
+2. 리스트 노드 삽입 
+
+#문제풀이 
+https://school.programmers.co.kr/courses/11102/lessons/70466
+def insertBefore(self, next, newNode):
+        prev = next.prev
+        newNode.prev = prev
+        newNode.next = next
+        prev.next = newNode
+        next.prev = newNode
+        self.nodeCount += 1
+        return True
+
+3. 리스트 노드 삭제 
+
+#문제풀이 
+https://school.programmers.co.kr/courses/11102/lessons/70467
+def popAfter(self, prev):
+        cur = prev.next
+        prev.next = cur.next
+        cur.next.prev = prev
+        
+        self.nodeCount -= 1
+        return cur.data
+
+
+    def popBefore(self, next):
+        cur = next.prev
+        cur.prev.next = next
+        next.prev = cur.prev
+        
+        self.nodeCount -= 1
+        return cur.data
+
+
+    def popAt(self, pos):
+        if pos < 1 or pos > self.nodeCount:
+            raise IndexError
+        else:
+            prev = self.getAt(pos - 1)
+            return self.popAfter(prev)
+            
+
+4. 리스트 병합 
+
+#문제풀이 
+https://school.programmers.co.kr/courses/11102/lessons/70468
+
+def concat(self, L):
+        cur=self.tail
+        prev=L.head
+        
+        cur.prev.next=prev.next
+        prev.next.prev=cur.prev
+        
+        self.tail=L.tail
+        self.nodeCount+=L.nodeCount
