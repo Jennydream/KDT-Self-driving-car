@@ -29,7 +29,7 @@ del[L2]
 - 시간복잡도
 
 append() : O(1)
-sort()   : O(NlgN)
+sort()   : O(NlogN)
 insert() : O(N)
 remove() : O(N)
 
