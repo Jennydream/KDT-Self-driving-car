@@ -9,5 +9,5 @@
 
 Big-O Notation 
  점근 표기법(asymptotic notation)의 하나로 어떤 함수의 증가 양상을 다른 함수와의 비교로 표현
- O(lgN), O(N), O(N^2)....
+ O(logN), O(N), O(N^2)....
 
