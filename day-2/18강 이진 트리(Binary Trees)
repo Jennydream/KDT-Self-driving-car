@@ -1,0 +1,93 @@
+## 개념 
+
+이진트리란 ?: 트리에 포함되는 모든 노드의 차수가 2 이하인 트리
+모든 노드는 자식이 없거나 (리프 노드의 경우), 하나만 있거나, 아니면 둘 있는 세 경우 중 하나에 해당
+
+## 알고리즘 
+
+  size() - 현재 트리에 포함되어 있는 노드의 수를 구함
+  depth() - 현재 트리의 깊이 (또는 높이) 를 구함
+  traversal() - 트리의 각 노드를 정해진 순서로 방문하는 것을 순회
+  
+    1. 깊이 우선 순회(depth first traversal)
+    - 중위 순회 (in-order traverasl): 왼쪽 서브트리를 순회한 뒤 노드 x 를 방문, 그리고 나서 오른쪽 서브트리를 순회
+    - 전위 순회 (pre-order traversal): 노드 x 를 방문한 후에 왼쪽 서브트리를 순회, 마지막으로 오른쪽 서브트리를 순회
+    - 후위 순회 (post-order traversal): 왼쪽 서브트리를 순회, 오른쪽 서브트리를 순회, 그리고 나서 마지막으로 노드 x 를 방문 
+    
+    2. 넓이 우선 순회(breadth first traversal)
+    - 레벨기준으로 순회 
+    
+
+## 연습문제
+
+문제 설명
+이미 주어진 코드 (class Node 와 class BinaryTree 에 의하여) 의 구조를 따르는 이진 트리 (binary tree) 에 대하여, 트리의 깊이 (depth) 를 구하는 연산의 구현을 완성하세요.
+
+#문제풀이 
+
+실습 1: depth()구현
+https://school.programmers.co.kr/courses/11102/lessons/70484
+
+def depth(self):
+        l = self.left.depth() if self.left else 0
+        r = self.right.depth() if self.right else 0
+        
+        #왼쪽과 오른쪽 중에서 더 깊은 길이로 반환
+        if r>l:
+            return r+1
+        else:
+            return l+1
+        
+def depth(self):
+        if self.root:
+            return self.root.depth()
+        else:
+            return 0
+
+실습 2: 전위순회 연산 구현
+https://school.programmers.co.kr/courses/11102/lessons/70485
+
+def preorder(self):
+        #반환할 리스트 
+        traversal = []
+        
+        #루트먼저 리스트에 저장
+        traversal.append(self.data)
+       
+       #왼쪽이 있을 경우 이동 
+        if self.left:
+            traversal += self.left.preorder()
+            
+        #오른쪽이 있을 경우 이동 
+        if self.right:
+            traversal += self.right.preorder()
+        
+        #최종 리스트 반환 
+        return traversal
+        
+def preorder(self):
+        if self.root:
+            return self.root.preorder()
+        else:
+            return []
+       
+
+실습 3: 후위순회 연산 구현
+https://school.programmers.co.kr/courses/11102/lessons/70486
+
+#전위순회와 설명 동일 
+def postorder(self):
+
+        traversal = []
+        if self.left:
+            traversal += self.left.postorder()       
+        if self.right:
+            traversal += self.right.postorder()
+        traversal.append(self.data)
+        return traversal
+        
+def postorder(self):
+        if self.root:
+            return self.root.postorder()
+        else:
+            return []
