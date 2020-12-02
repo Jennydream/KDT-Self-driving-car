@@ -1,0 +1,57 @@
+## 개념 
+
+환형 큐?: 정해진 개수의 저장 공간을 빙 돌려가면서 이용
+
+## 알고리즘 
+
+  front와 rear 설정
+  front : (self.front+1)%self.maxCount(큐 최대 길이)
+  rear  : (self.rear+1)%self.maxCount(큐 최대 길이)
+  최대 큐 길이 설정  
+  기존 큐 연산자에  isFull()-(큐에 원소가 꽉 차 있는지 판단) 추가
+  
+-시간복잡도 
+
+## 연습문제
+
+문제 설명
+Python 의 내장 데이터형인 리스트 (list) 를 이용하여 환형 큐의 추상적 자료 구조를 구현한 클래스 CircularQueue 를 완성하세요.
+
+#문제풀이 
+https://school.programmers.co.kr/courses/11102/lessons/70478
+
+def enqueue(self, x):
+        if self.isFull():
+            raise IndexError('Queue full')
+            
+        #현재 끝 위치에서 1개 추가하고 전체 큐 길이로 나눈 나머지로 위치 조정
+        self.rear = (self.rear+1)%self.maxCount
+        
+        #큐에서 현재 rear위치의 값
+        self.data[self.rear] = x
+        
+        #추가하고 개수 노드 1 증가
+        self.count += 1
+
+    def dequeue(self):
+        if self.isEmpty():
+            raise IndexError('Queue empty')
+            
+        #front 위치를  전체 큐 길이로 나눈 나머지로 위치 조정
+        self.front = (self.front+1)%self.maxCount
+        
+        #현재 front의 데이터 값 
+        x = self.data[self.front]
+        
+        #요소를 하나 삭제했으므로 1개 감소 
+        self.count -= 1
+        return x
+
+    def peek(self):
+        if self.isEmpty():
+            raise IndexError('Queue empty')
+            
+        #front 데이터 값 
+        return self.data[(self.front+1)%self.maxCount]
+
+
