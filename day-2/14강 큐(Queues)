@@ -1,0 +1,57 @@
+## 개념 
+
+큐(Queues)란? : 선입선출 (FIFO; first-in first-out)로 큐에 넣은 순서대로 하나씩 출력한다.
+
+## 알고리즘 
+
+1. 배열(Array)로 구현 : Python리스트와 메서드들을 이용
+
+2. 연결 리스트(Linked list)로 구현: 양방향 연결 리스트이용 
+
+큐에 데이터 원소를 넣는 동작을 enqueue 
+큐로부터 데이터 원소를 꺼내는 동작을 dequeue
+
+-시간복잡도 
+  
+  enqueue(), size(), isEmpty(), peek() : O(1)
+  dequeue() : O(N)
+
+## 연습문제
+
+문제 설명
+양방향 연결 리스트를 활용하여 큐 (queue) 의 추상적 자료구조 (abstract data structure) 구현을 완성하세요.
+
+#문제풀이 
+
+https://school.programmers.co.kr/courses/11102/lessons/70476
+
+class LinkedListQueue:
+
+    def __init__(self):
+        self.data = DoublyLinkedList()
+
+    def size(self):
+        #self.data의 노드 개수(nodeCount) 반환
+        return self.data.nodeCount
+
+    def isEmpty(self):
+        #self.data의 노드 개수를 0(nodeCount==0)으로 하여 반환 
+        return self.data.nodeCount==0
+
+    def enqueue(self, item):
+        node = Node(item)
+        
+        # 큐 크기의 맨 마지막 위치에 노드 추가 
+        self.data.insertAt(self.size()+1, node)
+
+    def dequeue(self):
+    
+        # 큐의 첫번째 요소 pop()
+        return self.data.popAt(1)
+
+    def peek(self):
+        #큐의 맨 첫번째 요소(head 더미이므로 head.next가 요소가 됨) 데이터 선택
+        return self.data.head.next.data
+
+
+
