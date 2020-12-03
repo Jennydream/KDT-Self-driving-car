@@ -57,13 +57,17 @@ def solution(tickets):
     #스택이 빌 때까지 반복
     while len(stack)>0:
         #스택의 맨 위의 값
+        #top 출력 : ICN -> JFK -> HND
         top=stack[-1]
         #top이 route에 없을 경우 ( 출발표가 없음) 혹은 출발표가 다 사용되어 이제 없을 경우 path에 추가
         if top not in route or len(route[top])==0:
             path.append(stack.pop())
         else:
             # 갈 수 있는 공항이 있을 경우 top에서 갈 수 있는 공항들 중 마지막 공항(알파벳 역순이므로)을 스택에 넣음
+            #route[top][-1] 출력: JFK -> HND- >IAD
+            
             stack.append(route[top][-1])
+            
             #표를 사용하였으므로 라우터에서는 해당 표 값은 제거
             route[top]=route[top][:-1]
     
