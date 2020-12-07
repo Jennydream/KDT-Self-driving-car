@@ -1,1 +1,49 @@
 
+1. UNIX 역사 
+    
+    - 항상 표준 문서와 공식문서를 먼저 보는 습관 가지기.
+    - 모든 기술발전은 개방된 호환성과 성능을 해결하기 위해 만들어 진다.
+    
+    - 공식 문서 
+      1). UNIX 
+          www.opengroup.org
+          
+      2). LINUX 
+          Red Hat: access.redhat.com
+          Linux Foundation : www.linuxfoundation.org
+          
+     - Ken Thompson이 게임을 위해 UNIX 개발 
+     - 이 과정에 C언어 개발  (개발자 :  Dennis Ritchie)
+        이로 인한 장점 : 하드웨어가 달라져도 rebuild/ 약간의 수정만으로도 포팅이 가능
+        C99 : 1999년 표준 (ISO/IEC 9899)
+        
+      -SysV계열과 BSD계열의 경쟁(각자 호환되지 않는 기능을 추가하고 개방하지 않았음)으로 호환성이 파괴
+        결과 : 개발자들의 어려움과 미 국무성의 불만 표출로 POSIX(Portable Operating System Interface)가 UNIX 시스템의 최소한의 호환성을 요구하기 위해 생김
+      
+      -POSIX 1003.1 (POSIX 1 =  IEEE std 1003.1 (1988) 
+      
+        System call에 대한 표준안
+        POSIX는 SysV계열, OSF(Open Software Foundation), BSD(Berkeley Software Distribution)의 최소한의 호환성을 보장
+        
+      -Linux 
+      
+        초기에는 임시 운영체제 
+        Minix의 사용이 불편하여 만들어짐(Linus Torvalds)
+        GUN(GUN is Not UNIX)과 협력하여 GUN의 컴파일러 GCC에 의해 더욱 발전
+        처음부터 POSIX 표준안에 근거하여 작성됨
+        현재 Fedora 오픈 프로젝트로 이양함
+        대형 시스템에 특수화, 작은 기기에 특수화
+        
+       - 배포판 
+        1). DEB 계열 : Debian, Ubuntu, Mint ...
+        2). RPM 계열 : RHEL, CentOS, Fedora, SuSe ...
+        
+       -배포판별 특징 
+       
+        1) CentOS : 포털 및 스타트업 기업이 가장 많이 사용
+        2) Ubuntu : 화면이 아름답고 초보자가 쓰기 편리
+        3) Fedora : 최신 기술을 확인하기 편리하여 선행기술 개발, 보안 시스템 개발에 사용
+        
+        
+        
+     
