@@ -24,6 +24,10 @@
         2) symbolic link : path만 가리키므로 다른 파티션, 모든 종류의 file에서 만들 수 있음. 
         
         - canonicalization : symbolic link를 따라서 최종적으로 hard link까지 도착하여 실체를 읽을 수 있는데까지 path
+   
+   - file mode bit : UNIX의 파일 권한을 나타내는 3+9 bit 체계(숨겨진 3bit(SetUID,SetGID,Sticky bit-보안 관련)를 포함하여 12bit이지만 화면에는 9칸(rwxrwxrwx)만 표시됨) 
+   - file 생성시 기본 값 : 기본 mode 값은 umask 값을 뺀 나머지가 된다.
+      예 : umask 022, 디렉터리 777-022=755, 파일 666-022=644
  
  3. stdio(표준 입출력) 기초 
   
@@ -49,6 +53,8 @@
       
      ps   : process status( 기본적으로 현재 세션의 프로세스들을 보여줌)
           man ps로 UNIX SysV, BSD, GUN 스타일에 대해 살펴보기 
+          BSD style : ps axf 
+          UNIX SysV style : ps -e --forest
           
      kill : 프로세스에 시그널을 send 하는 기능( 프로세스를 죽인다는 것은 잘못된 표현)
           SIGHUP(hang up), SIGINT(Interrupt), SIGTERM(Terminate), SIGTSTP(Temporary Stop) 등 이 있음 
