@@ -25,7 +25,7 @@
         System call에 대한 표준안
         POSIX는 SysV계열, OSF(Open Software Foundation), BSD(Berkeley Software Distribution)의 최소한의 호환성을 보장
         
-      -Linux 
+      - Linux 
       
         초기에는 임시 운영체제 
         Minix의 사용이 불편하여 만들어짐(Linus Torvalds)
@@ -34,16 +34,65 @@
         현재 Fedora 오픈 프로젝트로 이양함
         대형 시스템에 특수화, 작은 기기에 특수화
         
-       - 배포판 
+      - 배포판 
         1). DEB 계열 : Debian, Ubuntu, Mint ...
         2). RPM 계열 : RHEL, CentOS, Fedora, SuSe ...
         
-       -배포판별 특징 
+      - 배포판별 특징 
        
         1) CentOS : 포털 및 스타트업 기업이 가장 많이 사용
         2) Ubuntu : 화면이 아름답고 초보자가 쓰기 편리
         3) Fedora : 최신 기술을 확인하기 편리하여 선행기술 개발, 보안 시스템 개발에 사용
+
+2. 설치 및 설정
+
+      1) 설치 
+      
+       -VMware 설치 : 가상머신
+       https://www.vmware.com/kr/products/workstation-player.html
+       
+       장점 : 간편한 설치 및 구성 
+       단점 : 가상화로 인한 느린 속도, 일부 호스트 OS의 하드웨어 장치를 사용할 수 없음
+       
+       -Ubuntu 16.04.07 설치 
+       http://mirror.kakao.com/ubuntu-releases/16.04.7/
+       -> ubuntu-16.04.7-desktop-amd64.iso
+       
+       이후 동의 및 확인을 클릭하여 설치 
+       
+      2) 설정 
+       
+       BIOS에서 VT 기능이 enabled로 되어야 함
+       -> 윈도우(cmd) : systeminfo 명령어 실행 -> Hyper-V 요구사항 모두 "예"로 되어있어야 함.
+       -> VMware  settings-> processors-> virtualization engine에서 1,3번을 체크 표시
+       -> VMware Player-> File-> Preferences-> software updates-> 체크표시 해제 
+
+3. UNIX account 
         
-        
-        
+        - account(계정)종류 
+            1)system acconut : root 및 system service 전용 계정
+            2) normal account : 나중에 추가하는 로그인이 가능한 유저
+            
+            계정을 의 계층을 나누는 이유 : 권한을 분리하고 접근할 수 있는 디렉터리와 파일, 프로세스를 구분하기 위해 
+         
+         -User 관련 명령어          
+            -> useradd, usermod, userdel , id, whoami. su. passwd
+            
+         -Group 관련 명령어 
+            -> groupadd, groupmod, groupdel, newgrp, gpasswd
+       
+         - Tip!! : 항상 su - /sudo 사용하기(su를 그냥 사용할 경우 권한, 환경설정에 문제 생길 수 있다.)
+    
+ 4. Man page와 Locale 설정 
+ 
+          - man page (메뉴얼 페이지)사용 
+            -> man su 
+               한국어일 경우 내용일 빈약
+               영어로 바꾸면 최근 업데이트 된 내용까지 확인 가능
+          -locale 
+                      
+            -> locale설정 방법 : LANG 환경변수 설정(예:  export LANG=en_US.UTF-8/ export LANG=ko_KR.utf8-> date(언어에 따라 출력 바뀜))
+            -> 새로운 언어 추가 : locale-gen (예: locale-gen ja_JP.utf8) 
+            ->CTRL-ALT-F3 콘솔에서도 위처럼 설정( ALT-F7을 클릭하면 다시 원래로 화면 전환)
      
+- 바뀐 명령어를 확인하고 현재 사용하는 명령어에 익숙하기!
