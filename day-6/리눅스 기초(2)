@@ -16,7 +16,13 @@
   stat  : status of file( file의 meta data(파일이름, 생성시간 등) 을 출력)
   touch : file 메타정보 업데이트. 파일이 존재하지 않을 경우 빈 파일 생성 
   find  : find directory (예 : find . -name '*k.dat' -size +1500k [1500k이상의 파일 찾아서 출력)
-    
+  ln    : make link 
+        i-node : 파일의 메타 정보 및 관리용 객체 (파일은 고유의 i-node를 1개 가지고 있다)
+        
+        1) hard link : 같은 i-node를 가리키므로 동일 파티션내에서만 생성 가능. regular file(-rwxr--r--)만 가능. 실체를 가진 파일.
+        2) symbolic link : path만 가리키므로 다른 파티션, 모든 종류의 file에서 만들 수 있음. 
+        
+        - canonicalization : symbolic link를 따라서 최종적으로 hard link까지 도착하여 실체를 읽을 수 있는데까지 path
  
  3. stdio(표준 입출력) 기초 
   
@@ -27,4 +33,14 @@
         anonymous pipe(temporary), named pipe(persistency)
         채널의 방향을 바꿀 때 : A>B (stdout을 파일 B로 연결), A<B(stdin을 파일 B로 연결), A << B (방향 같고 추가 모드)
     cat : stdout와 파일을 자유롭게 연결해주는 기본 필터 
+  
+  4. 아카이브, 압축 명령어 
+    
+     archive  : 보관용 묶음 
+               tar(BSD), cpio(SysV)
+               tar -[ctxv] : 옵션에서 v(verbose)는 디버깅이나 확인 용도이므로 사용하지 않는 것이 좋다.(시간 많이 소모)
+               최근 압축 명령어(예) : tar c ./data ./exp | xz -TO ? bak_data.tar.xz
+     compress : 압축
+                압축률 : xz> bzip2 , zstd > gzip > lz4 (현재는 xz, zstd 많이 사용)
+                gzip, bzip2, xz, zstd, lz4
   
