@@ -1,0 +1,55 @@
+1. Linux에서 가장 많이 쓰이는 텍스트 편집기
+
+  vim : vi에 추가적인 확장 기능 부여(Amiga 부터)
+
+  -vim 설치 :
+   1) RH 계열 : yum -y install vim-enhanced
+   2) Debian 계열 : sudo apt -y install vim
+   
+  -파일 열기 : vim mytext.txt 
+  
+  -mode : key 
+   a : 현재 커서 위치에서 한칸 뒤로 이동한 후 입력 모드로 전환 
+   i : 현재 커서 위치에서 입력모드로 전환
+   o : 현재 행 아래에서 새로운 행을 하나 만든 후 입력 모드로 전환
+   <ESC> -> :w (파일 저장), :q(vim 종료)
+   #gg/#G/:# : #행으로 이동
+   
+2. vim 일반 모드 기초 명령어
+    
+   - delete/cut 
+      x     : 커서에 위치한 문자 삭제
+      dd/:d : 현재 행 삭제
+      D     : 현재 컬럼 위치에서 현재 행의 끝부분까지 삭제(=d$)
+      J     : 아래 행을 현재 행의 끝에 붙임(아래 앞부분 공백은 제거됨)
+     
+   - paste 
+      p     : 현재 행에 붙여 넣음(put)
+      :pu   : 개행 문자가 포함된 경우에는 현재 행의 아래에 붙여 넣음
+      
+   - copy 
+      yy/:y/Y : 현재 행을 레지스터에 복사(yank)
+      
+     -undo/redo 
+      u     : (undo)바로 이전에 행한 명령어 한 개 취소 
+      CTRL-R: (redo)바로 이전에 취소한 명령어 다시 실행
+      
+3. vim 클립보드 
+
+   - vi   : vim 종류 중에 가장 적은 기능을 가지고 있다. compact vim / tiny vim이라 부름
+            vim-minimal(RedHat 계열), vim-tiny(Debian계열)
+   - vim  : 일반적인 vim을 의미. enhanced vim이라고도 부름
+            vim-enhanced(RedHat 계열), vim-nox(Debian계열)
+   - vimx : 가장 많은 기능을 가진 vim. vim+clipborad, X window clipboard기능 포함
+            vim-athena(Debian계열)
+            
+   - X window 환경에서 vim과 클립보드 공유 
+     $ vim --version | grep clipboard -> (+xterm_clipboard 되어야 함)
+     
+   - ~/.vimrc 파일에 저장 가능
+     :set. :set all, :set[no]name 등의 명령어 있음
+
+      
+      
+      
+    
