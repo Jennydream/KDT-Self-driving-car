@@ -50,13 +50,47 @@
 4. Network configuration 
       
       - network 설정: legacy방식(기존), NetworkManager 방식 
-      - legacy 방식(지금은 사용 x- 자료 찾을 때 거르기 위한 참고로 알아두기!)
-        - 사용하지 말기!
-        /etc/network/interfaces에서 수정
-        /etc/init.d/netwokring restart 
-        /etc/init.d/networking
-        ifdown -a & ifup -a
-        
+      
+      1) legacy (지금은 사용 x- 자료 찾을 때 거르기 위한 참고로 알아두기!)
+         - 사용하지 말기!
+         /etc/network/interfaces에서 수정
+         /etc/init.d/netwokring restart 
+         /etc/init.d/networking
+         ifdown -a & ifup -a
+      
+      2) NetworkManager (daemon으로 작동하면서 network configuration수행, 자동으로 network connection을 관리 수행)
+         명령어 : (ifconfig 기존 명령어) ,route , ip, nmcli( Network Manager CLI tool)
+         -nmcli n : 네트워크 상태 조회 
+         -nmcli dev : device 확인 
+         -nmcli c s : 이더넷 연결 보기 
+         -nmcli <g | n | r | c | d >등의 명령어 있음
+         
+         - Practice : nmcli 이름 속성 변경 (e.g. 유선 연결 1 -> ens33으로 변경 )
+          1)) nmcli d (연결상태의 이름 확인)
+          2)) nmcli con modify "유선 연결 1" connection.id ens33
+          3)) nmcli c (변경된 결과 확인)
+          
+          - Practice : nmcli IP 속성 변경 (e.g. 192.168.111.11 -> 192.168.222.22로 변경 )
+          1)) nmcli c s (이더넷 이름 보기 )
+          2)) nmcli c s ens33 (Ip4.ADDRESS[1]부분의 주소 복사)
+          3)) nmcli c mod ens33 ipv4.method manual ipv4.addresses 192.168.111.11/24 ipv4.gateway 192.168.222.22 +ipv4.dns 8.8.8.8 (변경하기)
+          4)) nmcli c s ens33 (결과 확인)[nmcli c down ens33 && nmcli c up ens33]
+          
+           - Practice : virtual IP 추가 
+          1)) nmcli c mod ens33 +ipv4.addresses 192.168.110.181/24
+          2)) nmcli c mod ens33 +ipv4.addresses 192.168.110.182/24
+          3)) nmcli c up ens 33
+          
+           - Practice : virtual IP 삭제 
+          1)) nmcli c mod ens33 -ipv4.addresses 192.168.110.181/24
+          2)) nmcli c mod ens33 -ipv4.addresses 192.168.110.182/24
+          3)) nmcli c up ens 33
+          
+          -이외 기존설정 추가/삭제, dns 추가/삭제 등이 있음 
+          
+          
+         
+      
       
     
     
