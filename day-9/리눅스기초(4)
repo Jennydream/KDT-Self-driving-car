@@ -1,1 +1,62 @@
+1. Package Manager
+    
+    package란? : 시스템을 구성하는 파일의 묶음(관리[설치, 삭제, 업그레이드, 질의]의 편리함 제공)
+    
+    - Redhat  : rpm, yum
+    - Debian  : apt (기존 apt-get) , dkpg   
+      dpkg file 구조 : e.g. strace_4.5.20_2.3_adm64.deb -> package name _ version& release _ arch(x86)
+      현재는 apt가 더 많이 사용
+      
+      -dpkg 명령어 
+       dpkg -s strace : 패키지 상태 확인(설치/미설치)
+       dpkg -S /bin/ks: 패키지 검색(파일명) [e.g. dpkg -S '*trace']
+       
+ 
+ 2. APT 
+     
+     apt: debian의 dpkg를 랩핑한 front-end tool 
+     - source list : apt가 package를 가져오는 곳 (/etc/apt/source.list)
+                    /etc/apt/source.list.d 뒤에 vi kakao_list를 작성하여 kakaomirror에서 가져온 값 저장 (반복 부분에 사용 명령어 -> gg^CTRL-VGI#ESCESC)
 
+                    #kakao mirror : ubuntu 16.04 LTS
+                    deb http://mirror.kakao.com/ubuntu/ xenial main restricted universe
+                    deb http://mirror.kakao.com/ubuntu/ xenial-updates main restricted universe
+                    deb http://mirror.kakao.com/ubuntu/ xenial-security main restricted universe
+                    
+                    작성 후 : apt update
+                    
+      - apt search bash : bash가 들어간 경우 모두 검색
+      - apt search -n bash : 중간에 bash가 들어가도 검색
+      - apt search -n '^bash' : 시작부분에 bash가 있는 경우만 검색 
+      
+      - 설치 : apt -y install  name(e.g. htop)
+      - 확인 : apt show name(e.g. htop)
+      - 삭제 : apt purge name(e.g. htop)
+     
+3. Linux network 
+    
+      - Network 설정에 필요한 기초 용어 
+        hostname : primary hostname, FQDN(Fully Qualifed Domain Name , 도메인 내에서 유일하게 구별가능한 이름)
+        TCP/IP : IP주소 (IPv4, IPv6), subnet mask, gateway
+        NIC  : Network Interface Card (=랜카드)
+        
+      - localhost : 127.0.0.1(IPv4), ::1(IPv6)
+        IPv4 : 32bit주소 체계, 8bit씩 끊어서 읽음 
+        IPv6 : 128bit 주소 체계 , 16bit씩 끊어서 읽음 
+        
+      - IPv4에서 IPv6로 매핑 : ::ffff:IPv4_address (e.g. 58.232.1.100 =::ffff:58.232.1.100)
+        IPv4의 클래스 A,B,C,D,E 클래스 (현재는 CIDR로 사용)
+      
+4. Network configuration 
+      
+      - network 설정: legacy방식(기존), NetworkManager 방식 
+      - legacy 방식(지금은 사용 x- 자료 찾을 때 거르기 위한 참고로 알아두기!)
+        - 사용하지 말기!
+        /etc/network/interfaces에서 수정
+        /etc/init.d/netwokring restart 
+        /etc/init.d/networking
+        ifdown -a & ifup -a
+        
+      
+    
+    
