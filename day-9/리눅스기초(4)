@@ -57,7 +57,7 @@
          /etc/init.d/netwokring restart 
          /etc/init.d/networking
          ifdown -a & ifup -a
-      
+         
       2) NetworkManager (daemon으로 작동하면서 network configuration수행, 자동으로 network connection을 관리 수행)
          명령어 : (ifconfig 기존 명령어) ,route , ip, nmcli( Network Manager CLI tool)
          -nmcli n : 네트워크 상태 조회 
@@ -88,9 +88,49 @@
           
           -이외 기존설정 추가/삭제, dns 추가/삭제 등이 있음 
           
+      3)  Wireless network 
+          wireless부분도 NM(network manager)로 통합
           
-         
-      
-      
+          nmcli radio : radio wifi [on | off]
+          rfkill list: (문제 발생하였을 때)hard blocked가 yes/no인지 확인 
+          
+          주변 wifi 탐색 : nmcli dev wifi
+          connection : nmcli dev wifi connect ooo_wifi4 password xxxxxxxx
+          disconnection: nmcli d disconnect wlan0
+          
+          -hotspot 
+           station : 접속하는 쪽(스마트폰)
+           AP(hotspot) : 접속 하게 하는 쪽 (공유기)
+           
+           up : nmcli c up syhotspot
+           down : nmcli c down syhotspot
+           state : nmcli -p c s syhotspot            
+          
+5. Network tools 
+     
+     - 명령어 
+       ss : (netstat 현재 사용 x) 네트워크 상태 확인 [ -nt, -ntm, -s, -ntlp  등 여러가지 옵션 있음]
+       ping : 상대 호스트의 응답 확인 
+             e.g. ping -c 3 192.168.0.1
+             0.2초 간격으로 2000번 테스트 : ping -c 2000 -i 0.2 -s 1000 192.168.1.1
+       tracerout : 패킷의 도달 경로 확인(e.g. traceroute -n 63.99.207.68)      
+       arp 테이블 : IP와 MAC주소의 매칭 테이블 
+       dig : (nslookup 기존) 네임서버에 질의하는 유틸리티 (e.g. dig www.google.com)
+       
+     - ssh(secure shell): 통신 구간 암호화     
+       sshd : ssh server 
+       ssh  : ssh client 
+       
+       설치  : apt -y install openssh-server openssh-sftp-server
+       설치 확인 : apt list openssh*
+        
+       실행 확인 : systemctl status sshd 
+       실행 : systemctl start sshd
+       
+       방화벽 확인 : iptables/firewall-cmd, ufw) -> destination이면 방화벽 비활성 
+     
+      - curl : url을 기반으로 통신하는 기능 제공 (e.g. curl http://www.nate.com)
+      - wget <URL> : curl과 비슷하나 파일 다운로드에 특화된 기능 존재.
+      - nc(netcat) : network 기능이 가능한 cat (server, client 다 가능)
     
-    
+
