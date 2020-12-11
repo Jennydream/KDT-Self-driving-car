@@ -53,11 +53,26 @@
       디렉터리 구조 : /, /dev( 장치 파일들), /tmp (임시 파일 저장), /dev/null(널 디바이스),/dev/console(시스템 콘솔 장치) 이외에도 더 많은 세부 구조 존재
    
 2. Proc filesystem
-
+   
+   /proc : 프로세스 정보를 담고 있는 가짜 FS이다.
+   
+   명령어 : ls , (e.g.)exe 선택, ls -l exe( 결과 : exe-> /usr/bin/bash 와 같이 출력 )
+   /proc/####: :proc뒤에 pid 입력하여 세부 정보 확인    
+   /proc/cpuinfo : cpu 스펙 정보 
+   cat /proc/stat : cpu와 process관련 글로벌 통계 정보
 
 3. udisksctl
-
-
+   - D-bus기반의 block device manager (수동으로 mount하는 방식을 개량하여 만듦)
+     daemon service 작동, 다양한 block device에 대한 관리, udiskctl CLI제공 
+     
+     systemctl status udisks2 : service 확인 
+     udiskctl <tab>*2 : 명령어 다 출력 
+     
+     USB memory stick의 mount/umount를 console에서 진행하기 
+       (1) udiskctl mount --block-device /dev/sdc1 (결과 : /dev/sdc1이 /XX/XX(임시 파일)로 mount됨) 
+       (2) lsblk
+       (3) udiskctl umount --block-device /dev/sdc1
+       
 4. systemd
 
   1) background
