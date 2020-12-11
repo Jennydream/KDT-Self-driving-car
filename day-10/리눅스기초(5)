@@ -1,0 +1,24 @@
+1. Fs(File System)
+   1) File System 종류 및 만들기 
+   2) Make FS
+   3) Mount
+   4) fstab
+   
+2. Proc filesystem
+
+
+3. udisksctl
+
+
+4. systemd
+
+  1) background
+  2) unit
+  3) systemctl #1
+  4) systemctl #2
+  5) systemctl #3
+  6) systemctl #4
+  6) systemd-analyzer
+  
+5. journal log
+  
