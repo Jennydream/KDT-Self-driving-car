@@ -1,7 +1,27 @@
 1. Fs(File System)
+
    1) File System 종류 및 만들기 
+      FS : OS의 큰 부분을 차지 (컴퓨터 시스템의 메모리 역할 중 일부분 담당)
+          파일을 (계층적 구조)저장 
+      FS type : Linux-> xfs, ext4, zfs, Btrfs
+                Windows : ntfs, exfat, fat32, fat16 
+                
+     - 새로운 FS 만드는 법
+       (1) Partitioning : Phsical or logical 구획 (최근에는 logical partition 선호[logical voulume])
+           - disklable type 
+             Dos 방식 : 고전적인 방식 (주 파티션, 확장 파티션, 논리 드라이브)                
+             GPT 방식 : dos 레이블의 문제를 개선하기 위해 나온 새로운 방식 
+                       
+       (2) fdisk
+           fdisk -l : 현재 FS 리스트 출력 (최근에는 lsblk 를 더 많이 사용)
+           저장 장치 : SCSI disk, SATA, USB
+           변경후 명령어 : q(변경 상태를 저장하지 않고 종료), w(변경된 상태를 저장하고 종료), <CTRL-C> 강제 종료 
+       (3) Mount 
+       
    2) Make FS
+   
    3) Mount
+   
    4) fstab
    
 2. Proc filesystem
@@ -13,12 +33,18 @@
 4. systemd
 
   1) background
+  
   2) unit
+  
   3) systemctl #1
+  
   4) systemctl #2
+  
   5) systemctl #3
+  
   6) systemctl #4
-  6) systemd-analyzer
+  
+  7) systemd-analyzer
   
 5. journal log
   
