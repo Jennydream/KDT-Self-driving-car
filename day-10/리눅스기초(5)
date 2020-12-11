@@ -75,19 +75,49 @@
        
 4. systemd
 
-  1) background
-  
+  1) background 
+     모든 프로세스는 parent process로부터 복제 되어짐 
+     But PID 1번은 kernel에 의해 생성됨 ( 시스템 기동 및 관련된 작업을 하는 최초의 프로세스)
+     init : SysV 유닉스에서 만들어 짐, 부팅시 초기화 담당. (현재는 systemd 사용)
+     systemd : 시스템 설정을 통합 관리하는 데몬
+     ls -l $(which init) : 결과로 다른 위치 알려줌( 현재 호환성을 위해 제공)
+          
   2) unit
-  
+     systemd : unit 단위로 시스템 관리, 병렬처리. 
+     3가지 기능의 binaries : 
+     (1) system configuration : hostnamectl, localectl, timedatctl...
+     (2) system monitoring/querying : systemd-analyze, jouralctl, loginctl...
+     (3) system controlling : systemctl
+     
   3) systemctl #1
+     systemctl : list-units 화면에 대한 설명 
+     systemctl --all --state=dead : dead가 들어간 것 보여줌 
   
   4) systemctl #2
-  
+     systemtcl status (e.g.)nginx : unit 상태 출력 
+     systemtcl start/stop  : unit  시작/정지  
+     systemctl is-active nginx : unknow(결과)
+     echo $?  : exit code가 non-zero로 세팅되어 있음(0 : success, non-zero : fail)
+     systemctl kill nginx --signal=SIGABRT : abort signal전송 
+     
   5) systemctl #3
-  
+     systemctl enable : enable상태로 설정 후 reboot
+      
   6) systemctl #4
-  
+     systemctl -t target : target리스트 출력 
+     (1) multi-user.target : 멀티유저 모드
+     (2) graphical.target  : 그래피컬 모드(graphical mode = multi-user + X window)
+     
+     sudo systemctl isolate multi-user
+     root로 로그인 후
+     systemctl isolate graphical
+     systemctl get-default
+     systemctl set-default mult-user
+     systemctl get-default
+     reboo
+     
   7) systemd-analyzer
+     systemd-analyze : systemd의 구동을 분석(각 서비스의 시간을 분석 및 시각화 
   
 5. journal log
   
