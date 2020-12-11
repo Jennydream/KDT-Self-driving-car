@@ -120,4 +120,8 @@
      systemd-analyze : systemd의 구동을 분석(각 서비스의 시간을 분석 및 시각화 
   
 5. journal log
-  
+   기존 tail 명령어의 단점을 보완하기 위해 만들어짐 (시간순으로 기록), 메모리 기반이기때문에 재부팅할 경우 다 날림, root계정으로 진행
+   
+   journalctl : journal 출력 (추가로 옵션 설정 가능)
+   journalctl –f 로 확인 가능 
+   특정 log만 보고 싶을 때 : journalctl –p <priority> (e.g. err)[(-fp도 가능)
