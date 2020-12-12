@@ -74,17 +74,21 @@
             2) normal account : 나중에 추가하는 로그인이 가능한 유저
             
             계정을 의 계층을 나누는 이유 : 권한을 분리하고 접근할 수 있는 디렉터리와 파일, 프로세스를 구분하기 위해 
-            
-         -root 계정 비밀번호 수정 
-          sudo -i 
-          passwd (비밀번호 변경)
-          CTRL-D
-          su (바꾼 비밀번호 사용 
+         
+         - VMtool 설치(화면 확대) 
+             sudo apt install open-vm-tools-desktop
+             reboot
+             
+         - root 계정 비밀번호 수정 
+            sudo -i 
+            passwd (비밀번호 변경)
+            CTRL-D
+            su (바꾼 비밀번호 사용 
           
-         -User 관련 명령어          
+         - User 관련 명령어          
             -> useradd, usermod, userdel , id, whoami. su. passwd
             
-         -Group 관련 명령어 
+         - Group 관련 명령어 
             -> groupadd, groupmod, groupdel, newgrp, gpasswd
        
          - Tip!! : 항상 su - /sudo 사용하기(su를 그냥 사용할 경우 권한, 환경설정에 문제 생길 수 있다.)
