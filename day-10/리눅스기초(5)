@@ -33,6 +33,45 @@
       mount는 root directory(/)를 기점으로 시작 (file system에 탑재됨)
       기본 명령어 : mouunt, umount, findmount
       
+      -파티션 나누기 
+            root@selfdriving-virtual-machine:~# fdisk /dev/sdb
+            Welcome to fdisk (util-linux 2.27.1).
+            Changes will remain in memory only, until you decide to write them.
+            Be careful before using the write command.
+
+            Command (m for help): p
+            Disk /dev/sdb: 3 GiB, 3221225472 bytes, 6291456 sectors
+            Units: sectors of 1 * 512 = 512 bytes
+            Sector size (logical/physical): 512 bytes / 512 bytes
+            I/O size (minimum/optimal): 512 bytes / 512 bytes
+            Disklabel type: dos
+            Disk identifier: 0x2a81014c
+
+            Device     Boot Start     End Sectors  Size Id Type
+            /dev/sdb1        2048 3123199 3121152  1.5G 83 Linux
+
+            Command (m for help): n
+            Partition type
+               p   primary (1 primary, 0 extended, 3 free)
+               e   extended (container for logical partitions)
+            Select (default p): p
+            Partition number (2-4, default 2): 2
+            First sector (3123200-6291455, default 3123200): 
+            Last sector, +sectors or +size{K,M,G,T,P} (3123200-6291455, default 6291455): +1.5G
+
+            Created a new partition 2 of type 'Linux' and of size 1.5 GiB.
+
+            Command (m for help): w
+            The partition table has been altered.
+            Calling ioctl() to re-read partition table.
+            Syncing disks.
+
+            root@selfdriving-virtual-machine:~# lsblk
+            NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+            sdb      8:16   0    3G  0 disk 
+            ├─sdb2   8:18   0  1.5G  0 part 
+            └─sdb1   8:17   0  1.5G  0 part 
+ 
       연습 : /dev/sdb2를 mount하기 
         (1) : VMware에 sdb추가 
         (2) : sdb에 2개의 pratition만들기 
