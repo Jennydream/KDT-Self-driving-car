@@ -135,6 +135,41 @@
     - [ [] ]일 경우 : [ [ > or < ] ]로 사용 가능 
     -16진수 : 0x30
     -8진수  : 010 (0으로 시작)
+
+6. 확장 표현 
+   - offset, length 
+    변수의 일부분 또는 길이를 알아내는데 사용하는 방법 
+    $[#name} :변수의 길이
+    ${name:offset} :변수의 offset 위치부터 출력(0부터 시작)
+    ${name:offset:len} : 변수의 offset위치부터 len만큼 출력. len이 음수일 경우 뒤에서부터 계산
+    
+   - array 
+    echo ${#var_array[*]} : array의 원소 개수를 보여줌
+   - ${...[*]}를 ""로 감싸면 각각의 배열 요소를 IFS를 구분자로 하여 single string으로 변환 
+   - ${...[@]}를 ""로 감싸면 각각의 배열 요소는 개별적인 separated strings로 변환 
+     IFS=Internal Field Separator 
+  
+7. 확장 표현 
+   $$ : 현재 셸 프로세스의 PID
+   $! : $()로 묶인 서브셸로 실행된 경우는 부모셸의 PID 
+   $? : 최근 포그라운드 프로세스의 종료값
+   $# : 인수의 개수 
+   $0,$1,$2 ...: 인수 리스트 
+   
+   -double quotes를 묶을 때 
+     $* : args 전체를 1개의 string으로 
+     $* : param =aa
+     $* : param =bb
+     "$*" : param=aa bb
+     
+     $@ : argv를 입력한 형태 그대로 array로
+     $@ param = aa
+     $@ param = bb
+     "$@" param = aa
+     "$@" param = bb
+    
+   - backupdir.sh를 zstd를 이용하도록 수정  
+     
     
     
    
