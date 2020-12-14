@@ -28,7 +28,27 @@
       ![i]:n :이전 명령어의 n번째 가져오기 (0-n)
       ![i]:n-m :이전 명령어의 n부터 m까지 가져오기
       <ALT-.> : 이전 명령어의 마지막 가져오기
-      
-     
+
+2. bash shell의 작동원리 
+   -shell에서 실행되는 UNIX 명령어는 sub-shell(fork-exec로 만들어지는 child process)이 생성되어 실행 
+    e.g. ls -al -> bash(parent process) -> fork -> bash:sub-shell(child process) ->exec -> ls -al(child process)
+         복사하여 실행 후 exit code를 parent process에 반환 (echo $? 변수로 확인 => 0이면 성공, 그외 실패)
+    parent process는 exit code를 통해 자식 프로세스가 성공했는지 실패했는지 알수 있고, 그 여부에 따라 다음 작업을 실행 혹은 에러처리 하게 된다.
+    zombie process : parent process가 종료된 child process의 exit status를 처리하기 전의 상태 (프로세스가 종료되는 정상적인 과정중 하나이다)
+  
+  -rm --force 
+   UNIX command에 --force 옵션이 존재하는 것은 child process로 작동할 때 exit code를 조작하기 위함이다. 
+   force 옵션을 적용하면 return code를 0으로 넘겨주게 된다.(왜냐면 0이면 성공=> 다음 명령 실행 가능이므로)
+   rm명령어의 결과를 무시해야 하는 겨우에 -rm으로 많이 사용
+  
+  -exit code 
+   프로세스의 main 함수의 리턴값이다.(리턴값 범위 : 0~255)
+   리턴 값을 보고 parent process는 child process가 어떻게 종료되었는지 알 수 있게 된다. 
+   shell script에서 실행되는 모든 명령어 체계도 exit code/ signal 핸들링을 통해 안전하게 작성되어야 함. 따라서 정상작동이 아닌 경우에는 return 코드를 non-zero로 주도록 작성
+   
+   주의 : 특별한 경우가 아니면 root로 실습하지 않는다.
+   
+3. bash shell 문법 
+   
     
     
