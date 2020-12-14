@@ -49,6 +49,27 @@
    주의 : 특별한 경우가 아니면 root로 실습하지 않는다.
    
 3. bash shell 문법 
+
+   -변수 선언 : set
+    [set] name=value (=사이에 공백이 없어야 함)
+    ${name} :명확하게 변수명이 구별가능한 경우에 {}생략
+           
+   - 변수 삭제 : unset
+    unset <name> : name에 해당하는 변수 삭제 
+    
+   - 환경 변수 선언 : 3가지 방법 
+     (1) MY_ENV_VAR="Soo" ; export MY_ENV_VAR
+     (2) export MY_ENV_VAR="Soo"    ( 가장 많이 사용)
+     (3) declare -x MY_ENV_VAR="Soo"
+     
+   - path 추가 
+     주의 : export PATH=~/development/sdk/bin:$PAHT =>이 경우 .bashrc를 여러번 import 하여 PAHT가 엉망 된다.(~)
+    
+   -rc (run command, runtime config)
+    프로세스가 종료되면 shell 변수의 메모리 공간도 해제된다.
+    bash가 실행될 때마다 파일을 읽기 위해 rc나 profile에 변수의 값을 저장시켜야 함. 
+    .bashrc, bash_profile에서 저장 
+    
    
     
     
