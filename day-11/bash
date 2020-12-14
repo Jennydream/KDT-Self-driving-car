@@ -1,0 +1,34 @@
+1. bash sell 배경 
+
+   - Shell이란? : Application을 실행시키는 도구 
+                 OS의 커널에 직접 접근할 수 없기때문에 명령어 해석기인 shell이 필요
+   - History of shell
+     (1) Bourne shell : /bin/sh ( POSIX shell, 표준 shell)
+     (2) C shell  : /bin/csh
+     (3) Korn shell : /bin/ksh (UNIX의 sh개량형 -많이 가장많이 사용됨)
+     (4) bash : /bin/bash (The most popular shell) (Linux, Mac OSX에서 가장 많이 상요되는 shell)
+     (5) Zsh  : /bin/zsh (데스크탑 편의성에 맞춘 기능이 많음)
+    
+   - special character 
+     ` : backtict
+     # : hash
+     ^ : caret 
+     이 외에도 많음!
+     
+   - vi , emacs input mode
+     
+     vi : set -o vi
+     -editing mode : j(1줄 아래 이동), k(1줄 위로 이동), #G(#번째 이동), TAB(command-completion),= (매칭된 파일 이름 출력), *(매칭된 모든 파일명 프롬프트로 복사),/(전방 탐색),?(후방 탐색) 
+     
+     emacs : set -o emacs
+     -editing mode : ^A(라인 앞으로 이동), ^E(라인 뒤로 이동), ^L(=Clear), Tab(명령어 자동 완성),^R(명령어 후방 탐색), ^S(명령어 전방 탐색) 이 외 많음!
+      ^ 문제점 : 기본적으로 Linux bash에서는 ^S를 STOP으로 사용. 따라서 이를 해제해야 ^S를 사용 가능 (~/.bashrc -> stty STOP '')설정
+      
+     -이전 명령어 일부분만 다시 가져오기 
+      ![i]:n :이전 명령어의 n번째 가져오기 (0-n)
+      ![i]:n-m :이전 명령어의 n부터 m까지 가져오기
+      <ALT-.> : 이전 명령어의 마지막 가져오기
+      
+     
+    
+    
