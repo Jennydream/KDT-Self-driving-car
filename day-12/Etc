@@ -1,0 +1,9 @@
+1. Etc
+   \b: boundary가 맞는 표현식만 찾음
+   \B: boundary에 맞지 않는 표현식만 찾음
+   
+  - 0~63까지 표현할 때 : (6[0-3]|[5-1][0-9]|[0-9])
+  - 한국어 : egrep --color '[ㄱ-ㅎ| ㅏ-ㅣ|가-힣]+' hangul-utf8.txt
+  -backtracking : greedy matching 속성으로 인해 역탐색을 하는 행위 => 성능 떨어뜨리는 요인!(빈번하게 regex test를 하는 구조라면 backtracking을 제거하는 것이 좋음)
+   backtracking을 피하려면 .* / .+ 과 같이 greedy한 표현식을 남발하면 안됨
+   .은 되도록 쓰지 않거나 써야 한다면 lazy quantifier를 사용하는 것이 좋음(.*?, .+?)
