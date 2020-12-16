@@ -7,3 +7,27 @@
   -backtracking : greedy matching 속성으로 인해 역탐색을 하는 행위 => 성능 떨어뜨리는 요인!(빈번하게 regex test를 하는 구조라면 backtracking을 제거하는 것이 좋음)
    backtracking을 피하려면 .* / .+ 과 같이 greedy한 표현식을 남발하면 안됨
    .은 되도록 쓰지 않거나 써야 한다면 lazy quantifier를 사용하는 것이 좋음(.*?, .+?)
+
+2. PCRE (Perl Compatible Regular Expression)
+   
+   -PCRE v1 :  pcretest, pcregrep
+   -PCRE v2 :  pcre2test, pcre2grep
+   
+   -grep -P : grep의 기본 값은 POSIX
+   
+   -Front : \A (문서의 맨 앞부분과 매칭, ^과 같은 기능)
+   -End : \Z (문서의 맨 뒷부분과 매칭. 일반적으로 $과 같으나 , multiline mode에서는 문서의 맨 마지막 행을 의미.$는 \n문자만 의미)
+   
+   -PCRE2 : 기존의 POSIX REGEX API와 완전히 하위 호환성을 가짐 
+    사용법 : regex.h 헤더 대신에 pcre2posix.h로 교체하고 linking 옵션인 -lpcre2-posix 추가해주면 됨
+   
+   - look-ahead  : (?=look)
+   - look-behind : (?<=look)
+     look부분의 패턴은 fixed length만 지원됨
+     
+   - 뒤에 percentage 기호가 나오는 앞부분만 검색 : look=%
+     e.g. : pcre2grep --color '\d+\.?\d+?(?=%)' gdp_states.txt
+     
+   - 앞에 percentage 기호가 나오는 앞부분만 검색 : look=$
+     e.g. : pcre2grep --color '(?<=\$)\d+\.?\d+?' gdp_states.txt
+     
