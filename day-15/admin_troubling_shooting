@@ -45,7 +45,14 @@
      
 
 2. Resource limit
-
+   
+   - ulimit : 사용자의 자원 제한 (멀티 유저 OS에서는 자원을 나누어 써야 함)
+     - soft vs hard limit 
+       sotf limit <= hard limit : hard limit 크기 안에서 soft limit를 지정 할 수 있음( root 유저 해당 안됨)
+       core dump제한, CPU time 제한, fork 제한 
+         
+   - PAM(limits.conf) : login시에 제약 설정  (/etc/pam.d/login)
+     /etc/security/limits.conf아래에 파일을 하나 생성하여 설정 
 
 3. Kernel param
 
