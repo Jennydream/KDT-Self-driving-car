@@ -1,0 +1,57 @@
+1. Memory
+   - Modern OS의  Memory= Virtual memory 
+     하드웨어 조립 수준에서 메모리는 RAM을 의미
+     Modern OS는 VM을 paging, segmentation과 같은 기법으로 구현
+     -paging : Memory를 규격화된 크기로 잘라서 사용
+     -segmentation : 비 규격화된 메모리(page를 가져다가 다시 자르고, 붙여서 만듬=> 여기서 fragment가 발생)
+                     프로세스가 실제로 사용하는 메모리는 세그먼크가 됨
+     -page vs. segment
+      OS가 바라보는 메모리 규격 : Page
+      Process가 바라보는 메모리 규격 : Segment
+      
+    - paging :Memory fragment 
+      CPU:MMU(Memory Management Unit)에서 진행
+      -paging fault 
+       soft page fault : disk로부터 읽어들이지 않는 경우
+       hard page fault : (=minor, major) disk로부터 읽어들이는 경우
+     
+    - dirty pages
+      커널에서 write I/O의 성능을 향상시키기 위해 사용하는 메모리
+      modified page가 write-back되기 전 상태 = disk 보다 memory가 더 최신 데이터인 경우 (out-of date 상태)
+    
+    - coherency : Cache - RAM - Dist 까지 항상 일관성이 유지 
+    
+    - mmap : File을 process memory area에 mapping시키는 기법 
+      mmap I/O처리 기법 : kernel의 buffer(file cache)를 process memory에 mapped시킴.file cache는 page size단위. posix_madvise와 더불어 사용됨 
+    
+    - paging in : physical memory로 로딩 
+    - paging out : physical memory로 언로딩 
+    - Swap in : disk 공간에서 physical memory로 로딩 
+    - Swap out: physical memory에서 disk 공간으로 이동
+    
+    - free memory 
+      Free memory != available memory
+      -free 명령을 통해 free memory 상태 확인 가능 (EL6, EL7은 다르게 출력됨)
+       free는 기본적으로 kilo단위로 출력(-m, -g, -h로 출력 단위 변경 가능 )
+       free 명령어에서 free영역은 부팅후 점점 줄어듬 : 파편화된 조각 , Linux OS가 최대한 메모리를 캐시, evictable 영역 있기때문에
+    
+    - meminfo : memory 상태에 대해 자세한 정보 알려줌 (초급자 이상 사용 cat /proc/meminfo)
+      active memory(anonymous와 file-baked): LRU에 의해 최근에 사용된 페이지 
+      inactive memory(anonymous와 file-baked) : active와 반대. candidates for paging out
+      
+      file-backed vs anonymous : anonymous가 relese cost가 더 높음 
+      
+      메모리가 부족할 때 메모리 release될 순서 ->  Inactive file-backed, Inactive anonymous, activefile-backed, active anonymous
+     
+
+2. Resource limit
+
+
+3. Kernel param
+
+
+4. Tuned
+
+
+5. Processors
+
