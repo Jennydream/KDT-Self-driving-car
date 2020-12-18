@@ -55,10 +55,39 @@
      /etc/security/limits.conf아래에 파일을 하나 생성하여 설정 
 
 3. Kernel param
-
-
+   kernel : /proc/sys/<class> (class에는 debug, dev, fs, kernel, net, surpc, user, vm 등이 있음)
+   
+   - sysctl : configure kernel parameters at runtime(=작동중인 시스템의 현재상황 설정 및 보여줌)
+     /etc/sysctl/conf, /etc/sysctl/d/*.conf에 설정하여 재부팅시에 휘발되지 않도록 한다.
+   
+   - TCP buffer 
+     net.core.rmem_max
+     net.core.wmen_max
+     수신측은 RTT에 따라, 송신측은 혼잡에 따라 크게 영향 받음 
+     
+     - net.ipv4.tcp_timestamps : 1(on), 0(off) 이 외의 여러 명령어 있음
+    
+   - kernel parameter 변경하는 2가지 방법 
+     (1) sysctl로 변경  : e.g.  sysctl -w vm.dirty_background_ratio=12
+     (2) /proc/sys 밑에 있는 맵 파일을 직접 변경 : e.g. vm.dirty_background_ratio (좋은 방법 아님)
+   
+   - swap 
+     default : 30
+     작으면 작을 수록 swap을 피하고 page cache쪽에서 가져오도록 함 
+     0이 되면 page cache를 빼앗는 작업을 자주하여 오버헤드 발생할 수 있음. 따라서 특별한 경우가 아니면 기본값을 바꾸지 않는 것이 좋음.
+     일반적으로 빠른 network 통신용 시스템에서는 10을 사용.
+                                                       
 4. Tuned
-
+   
+   /usr/lin/tuned/
+   
+   - dynamic adaptive system tuning daemon
+     tuned : daemon server binary 
+     tuned-adm : a command line tool, provides a sub-command
+     
+   -profile : display the currently active profile 
+   -powersave : IoT나 관련 장치에서 주로 사용, 일반적인 서버의 경우에는 추천하지 않음 
+                1G이상의 네트워크를 사용하는 경우에도 사용 하지 않는 것이 좋음.
 
 5. Processors
 
