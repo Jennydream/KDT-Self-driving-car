@@ -18,3 +18,38 @@
     
     - awk script는 single quotes로 묶음
     - GNU awk(gawk)에서 POSIX로 작동하려면 --posix 옵션 주기
+ 
+3. Debugging, verbose
+   
+   #! /bin/bash -x : 명령행의 실행후 값과 결과를 출력하여 값의 변화를 추적할 수 있게 해줌
+   #! /bin/bash -v : 명령행의 소스를 그대로 출력함-> 실행 흐름을 알 수 있게 해줌
+   
+   -명령어 
+    set -x : xtrace on, set +x : xtrace off
+    set -v : verbose on, set +v : verbose off
+   
+   -trap 
+    command, function : 시그널이 캐치되면 작동될 명령 혹은 함수 (e.g. trap -SIGTERM)
+    trap은 shell, subshell에는 적용되나 child에는 상속되지 않음
+    -trap 선언 위치 : function안에서 선언ㅇ되면, 해당 function scope에서만 유효 (trap -p: trap 리스트 출력)
+   
+   -pkill, pgrep 
+    process의 이름만 알고 pid를 모르는 경우 kill을 쓸때 사용
+    e.g. pkill -fx ".*trap01.sh"
+ 
+4. sub-shell 
+   
+   -echo $?는 exit code이지만 범위에 따라 의미가 다름 
+    echo $?명령위에 echo "===="와 같은 명령을 먼저 실행했다면 결과는 항상 0이되므로 출력을 조심해야 함
+   
+   -wait 
+    특정 PID를 기다릴때 사용 (wait $child_pid)
+   
+   -error
+    bash에서 critical section처리 할 때 : set -e로 error on exit옵션을 켜고 작업하기.(exit code가 non-zero가 감지되면 스크립트는 즉시 종료됨)
+    critical section이 종료되면 set +e로 옵션을 끈다.
+    
+    
+    
+   
+    
