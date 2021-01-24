@@ -1,0 +1,12 @@
+## 개념 
+
+알고리즘의 복잡도(complexity of Algorithms)
+
+- 시간 복잡도 (Time complexity) : 문제의 크기와 이를 해결하는데 걸리는 시간 사이의 관계
+- 공간 복잡도(Space complexity) : 문제의 크기와 이를 해결하는데 필요한 메모리 공간 사이의 관계
+- 평균 시간 복잡도(Average Time complexity) : 임의의 임력 패턴을 가정했을 때 소요되는 시간의 평균
+- 최악 시간 복잡도(Worst-case Time complexity) : 가장 긴 시간을 소요하게 만드는 입력에 따라 소요되는 시간 
+
+Big-O Notation 
+ 점근 표기법(asymptotic notation)의 하나로 어떤 함수의 증가 양상을 다른 함수와의 비교로 표현
+ O(logN), O(N), O(N^2)....

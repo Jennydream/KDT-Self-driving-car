@@ -1,0 +1,39 @@
+## 개념 
+
+힙이란 ?: 이진트리의 한 종류 
+  
+## 알고리즘 
+
+  -최대 힙 (max heap) 과 최소 힙 (min heap) 
+  
+  루트 노드가 항상 최댓값을 가진다.
+  완전 이진 트리이다.
+  최대 힙 내의 임의의 노드를 루트로 하는 서브트리 또한 최대 힙이다.
+  
+-시간복잡도 
+  원소 삽입/삭제 : O(logN)
+  최악 복잡도 : O(logN)
+
+## 연습문제
+
+#문제풀이 
+https://school.programmers.co.kr/courses/11102/lessons/70494
+
+문제 설명
+초기 코드에 주어진 class MaxHeap 에 최대 힙에 새로운 원소를 추가하는 연산인 insert() 메서드의 구현을 완성하세요.
+
+def insert(self, item):
+        #트리의 마지막 자리에 새로운 원소 임시저장
+        self.data.append(item)
+       
+        #노드 위치   
+        i=len(self.data)-1
+        
+        #루트까지 조건을 만족하는데까지 올라가면서 이동 
+        while i>1:
+            #부모노드키(self.data[i//2])와 비교하여 자신보다 작으면 위로 이동 
+            if self.data[i]>self.data[i//2]:
+                self.data[i], self.data[i//2]= self.data[i//2],self.data[i]
+                i=i//2
+            else:
+                break

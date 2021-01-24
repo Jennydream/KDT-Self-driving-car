@@ -1,0 +1,43 @@
+## 알고리즘
+
+  level이 낮은 노드를 우선으로 방문
+  같은 level의 노드들 사이에는 부모노드의 방문 순서에 따라 방문.
+  왼쪽 자식 노드를 오른쪽 자식보다 먼저 방문 
+  
+  - 한 노드를 방문 했을 때 나중에 방문할 노드들을 순서대로 기록해야 함
+  
+## 연습문제
+
+#문제풀이 
+
+https://school.programmers.co.kr/courses/11102/lessons/70488
+
+문제 설명
+이진 트리를 구현한 클래스인 class BinaryTree 에 대하여 넓이 우선 순회 (breadth first traversal) 를 구현하는 메서드 bft() 를 완성하세요.
+
+def bft(self):
+        queue=ArrayQueue()
+        
+        #반환할 리스트 
+        answer=[]
+        
+        #루트면 큐에 추가
+        if self.root:
+            queue.enqueue(self.root)
+        
+        #큐가 빌 때까지 삽입 및 삭제 반복 
+        while not queue.isEmpty():
+            #맨 앞노드 pop
+            node=queue.dequeue()
+            
+            #answer리스트에 추가 
+            answer.append(node.data)
+            
+            #왼쪽과 오른쪽 확인 하여 큐에 추가
+            if node.left:
+                queue.enqueue(node.left)                
+            if node.right: 
+                queue.enqueue(node.right)      
+                
+        #최종 리스트 반환 
+        return answer
