@@ -10,13 +10,7 @@ import time
 
 from numpy import *
 from matplotlib import *
-
-
 import rospy
-
-sys.path.append(os.path.dirname("/home/soorim/programmers_sdv/project_ws/src/obstacles/src/collision_check_with_visualizing_car"))
-import collision_check_with_visualizing_car
-
 
 # initialize
 V_MAX = 10     # maximum velocity [m/s]
@@ -43,8 +37,6 @@ K_LON = 1.0 # weight for longitudinal direction
 
 SIM_STEP = 100 # simulation step
 SHOW_ANIMATION = True # plot 으로 결과 보여줄지 말지
-
-
 
 # lateral planning 시 terminal position condition 후보  (양 차선 중앙)
 DF_SET = np.array([LANE_WIDTH/2, -LANE_WIDTH/2])
@@ -388,7 +380,7 @@ def check_path(fplist, obs, mapx, mapy, maps):
     return [fplist[i] for i in ok_ind]
 
 
-
+#spawn_agent.py로 부터 호출되어 최적 경로를 반환한다.
 def frenet_optimal_planning(si, si_d, si_dd, sf_d, sf_dd, di, di_d, di_dd, df_d, df_dd, obs, mapx, mapy, maps, opt_d):
     fplist = calc_frenet_paths(si, si_d, si_dd, sf_d, sf_dd, di, di_d, di_dd, df_d, df_dd, opt_d)
     
