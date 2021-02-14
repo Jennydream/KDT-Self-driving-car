@@ -146,15 +146,6 @@ def get_ros_msg(x, y, yaw, v, id):
         "quaternion": quat
     }
 
-
-
-def get_parking_car_grid():
-    car2_y, car2_x = get_car_grid(car2_data)
-    car3_y, car3_x = get_car_grid(car3_data)
-    return (car2_x, car2_y), (car3_x, car3_y)
-
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Spawn a CV agent')
 
@@ -208,16 +199,13 @@ if __name__ == "__main__":
     mapy=waypoints["y"]
 
   
-    
+    # waypoint값으로 optimal_trajectory_Frenet에서 사용할 map 생성.
     maps = np.zeros(mapx.shape)  
-
     for i in range(len(mapx)-1):
 	
         x = mapx[i]
-        y = mapy[i]
-	
-        sd = optimal_trajectory_Frenet.get_frenet( x ,y, mapx,mapy)
-	
+        y = mapy[i]	
+        sd = optimal_trajectory_Frenet.get_frenet( x ,y, mapx,mapy)	
         maps[i] = sd[0]
     
     
@@ -225,12 +213,12 @@ if __name__ == "__main__":
     s, d = optimal_trajectory_Frenet.get_frenet(state.x, state.y, mapx, mapy);
     x, y, yaw_road =optimal_trajectory_Frenet.get_cartesian(s, d, mapx, mapy, maps)
     yawi = state.yaw - yaw_road
-     
+    
+    #장애물 x,y좌표를 s,d값으로 변환
     ob1_s,ob1_d=optimal_trajectory_Frenet.get_frenet(45.4, 31.7, mapx, mapy);  
     ob2_s,ob2_d=optimal_trajectory_Frenet.get_frenet(25.578, -10.773, mapx, mapy);
     
     # static obstacles
-  
     obs = np.array([[ob1_s,ob1_d],
                    [ob2_s,ob2_d],
                    ])
@@ -248,8 +236,7 @@ if __name__ == "__main__":
     si = s
     si_d = state.v*np.cos(yawi)
     si_dd = 0*np.cos(yawi)
-    sf_d = TARGET_SPEED
-    
+    sf_d = TARGET_SPEED    
     sf_dd = 0
 
     # d 방향 초기조건
@@ -264,18 +251,16 @@ if __name__ == "__main__":
     
     while not rospy.is_shutdown():
         # generate acceleration ai, and steering di
-        # YOUR CODE HERE	
        
-        ai = 0.0
-        
+        ai = 0.0       
 	steer=0.0
 	opt_ind = di
 	
-	######## optimal planning 수행 (output : valid path & optimal path index)
+	# optimal planning 수행 (output : valid path & optimal path index)
         path_opt, opt_ind = optimal_trajectory_Frenet.frenet_optimal_planning(si, si_d, si_dd,
                                                 sf_d, sf_dd, di, di_d, di_dd, df_d, df_dd, obs, mapx, mapy, maps, opt_d)  
 
-	
+	#다음 step의 초기조건으로 업데이트
         si =  path_opt[0].s[1]
         si_d =  path_opt[0].s_d[1]
         si_dd =  path_opt[0].s_dd[1]
@@ -286,13 +271,12 @@ if __name__ == "__main__":
         # consistency cost를 위해 update
         opt_d =  path_opt[opt_ind].d[-1]
        
-	######## stanley method 
-	steer = stanley.stanley_control(state.x, state.y, state.yaw, state.v, path_opt[opt_ind].x, path_opt[opt_ind].y, path_opt[opt_ind].yaw)
-		      
+	#  optimal planning으로 나온 경로를 따라 stanley method방식을 통해 steer 구함
+	steer = stanley.stanley_control(state.x, state.y, state.yaw, state.v, path_opt[opt_ind].x, path_opt[opt_ind].y, path_opt[opt_ind].yaw)		      
         steer = np.clip(steer, -state.max_steering, state.max_steering)	
 	
-	if di<=0.0:
-		
+	# waypoint위치 0.0값, 현재 기준(+위치에서 )에서 차가 장애물을 발견하여 '-' 방향으로 각도가 꺾일 경우 steer 값을 크게 변경
+	if di<=0.0:	
 		steer = stanley.stanley_control(state.x+0.3, state.y+0.3, state.yaw+0.3, state.v, path_opt[opt_ind].x, path_opt[opt_ind].y, path_opt[opt_ind].yaw)
 		
         # update state with acc, delta
