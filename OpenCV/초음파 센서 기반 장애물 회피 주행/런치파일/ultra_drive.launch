@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find xycar_motor)/launch/xycar_motor_b2.launch" />
+  <node name= "ultra_pub" pkg="ultra_drive" type= "ultra_pub.py" /> 
+  <node name= "ultra_drive" pkg="ultra_drive" type= "ultra_drive.py" output="screen" /> 
+</launch>
+
